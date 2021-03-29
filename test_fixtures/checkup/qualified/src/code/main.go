@@ -3,7 +3,7 @@ package code
 import (
 	"fmt"
 
-	"github.com/nicksnyder/go-i18n/i18n"
+	"github.com/EverlongProject/go-i18n/i18n"
 )
 
 func main() {

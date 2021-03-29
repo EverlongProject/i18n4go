@@ -2,7 +2,6 @@ package input_files
 
 import (
 	"fmt"
-	"strings"
 )
 
 func Interpolated() string {

@@ -1,7 +1,7 @@
 package cmds
 
 import (
-	"github.com/Liam-Williams/i18n4go/common"
+	"github.com/EverlongProject/i18n4go/common"
 )
 
 type CommandInterface interface {

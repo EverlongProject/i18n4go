@@ -9,8 +9,9 @@ import (
 	"strings"
 
 	"github.com/pivotal-cf-experimental/jibber_jabber"
+	"google.golang.org/genproto/googleapis/ads/googleads/v1/resources"
 
-	go_i18n "github.com/nicksnyder/go-i18n/i18n"
+	go_i18n "github.com/EverlongProject/go-i18n/i18n"
 )
 
 const (

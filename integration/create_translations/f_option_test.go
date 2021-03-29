@@ -3,10 +3,11 @@ package create_translations_test
 import (
 	"path/filepath"
 
-	. "github.com/Liam-Williams/i18n4go/integration/test_helpers"
+	"os"
+
+	. "github.com/EverlongProject/i18n4go/integration/test_helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"os"
 )
 
 var _ = Describe("create-translations -f fileName --languages \"[lang,?]+\"", func() {

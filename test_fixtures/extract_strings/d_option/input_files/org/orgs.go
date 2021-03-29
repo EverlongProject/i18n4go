@@ -1,6 +1,6 @@
 package organization
 
-import ()
+import "github.com/urfave/cli"
 
 type ListOrgs struct {
 	ui      terminal.UI

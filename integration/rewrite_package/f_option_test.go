@@ -1,12 +1,13 @@
 package rewrite_package_test
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 
-	. "github.com/Liam-Williams/i18n4go/integration/test_helpers"
+	. "github.com/EverlongProject/i18n4go/integration/test_helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -123,7 +124,8 @@ var _ = Describe("rewrite-package -f filename", func() {
 			actualBytes, err := ioutil.ReadFile(expectedInitFile)
 			Ω(err).ShouldNot(HaveOccurred())
 			actual := strings.TrimSpace(string(actualBytes))
-
+			fmt.Println("GOT:", actual)
+			fmt.Println("EXPECTED:", expected)
 			Ω(actual).Should(Equal(expected))
 		})
 	})
