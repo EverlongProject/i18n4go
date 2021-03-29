@@ -12,7 +12,7 @@ import (
 
 	"reflect"
 
-	"github.com/Liam-Williams/i18n4go/common"
+	"github.com/EverlongProject/i18n4go/common"
 )
 
 type verifyStrings struct {

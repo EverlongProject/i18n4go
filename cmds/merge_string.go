@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Liam-Williams/i18n4go/common"
+	"github.com/EverlongProject/i18n4go/common"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/semaphore"
 )
@@ -74,7 +74,7 @@ func (ms *MergeStrings) combineStringInfosPerDirectory(directory string) error {
 		if err := sem.Acquire(context.TODO(), 1); err != nil {
 			return fmt.Errorf("err acquiring semaphore: %w", err)
 		}
-		
+
 		f := file // copy file for goroutine closure
 		eg.Go(func() error {
 			defer sem.Release(1)

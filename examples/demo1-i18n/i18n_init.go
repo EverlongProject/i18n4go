@@ -10,7 +10,7 @@ import (
 
 	"github.com/pivotal-cf-experimental/jibber_jabber"
 
-	goi18n "github.com/nicksnyder/go-i18n/i18n"
+	goi18n "github.com/EverlongProject/go-i18n/i18n"
 )
 
 type Detector interface {
@@ -34,9 +34,9 @@ var SUPPORTED_LOCALES = map[string]string{
 	"fr": "fr_FR",
 	"it": "it_IT",
 	"ja": "ja_JA",
-	//"ko": "ko_KO", - Will add support for Korean when nicksnyder/go-i18n supports Korean
+	//"ko": "ko_KO", - Will add support for Korean when EverlongProject/go-i18n supports Korean
 	"pt": "pt_BR",
-	//"ru": "ru_RU", - Will add support for Russian when nicksnyder/go-i18n supports Russian
+	//"ru": "ru_RU", - Will add support for Russian when EverlongProject/go-i18n supports Russian
 	"zh": "zh_Hans",
 }
 

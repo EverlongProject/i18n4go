@@ -1,6 +1,10 @@
 package organization
 
-import ()
+import (
+	"errors"
+
+	"github.com/urfave/cli"
+)
 
 type RenameOrg struct {
 	ui      terminal.UI

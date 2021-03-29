@@ -1,5 +1,13 @@
 package app
 
+import (
+	"fmt"
+	"strings"
+	"time"
+
+	"github.com/urfave/cli"
+)
+
 var appHelpTemplate = `{{.Title "NAME:"}}
    {{.Name}} - {{.Usage}}
 

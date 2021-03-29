@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/maximilien/i18n4go/i18n"
-	goi18n "github.com/nicksnyder/go-i18n/i18n"
+	goi18n "github.com/EverlongProject/go-i18n/i18n"
+	"github.com/EverlongProject/i18n4go/i18n"
 )
 
 var T goi18n.TranslateFunc

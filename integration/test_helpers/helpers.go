@@ -92,7 +92,7 @@ func ReadPo(fileName string) map[string]string {
 func ReadJson(fileName string) map[string]string {
 	fileByte, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		Fail("Cannot open json file:" + fileName)
+		Fail("Cannot open json file:" + fileName + "ERR:" + err.Error())
 	}
 
 	var b interface{}

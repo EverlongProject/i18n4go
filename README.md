@@ -1,15 +1,15 @@
-i18n Tooling for the Go Language [![Build Status](https://travis-ci.org/maximilien/i18n4go.svg?branch=master)](https://travis-ci.org/maximilien/i18n4go#)
+i18n Tooling for the Go Language [![Build Status](https://travis-ci.org/EverlongProject/i18n4go.svg?branch=master)](https://travis-ci.org/EverlongProject/i18n4go#)
 ==============================
 
-[![Join the chat at https://gitter.im/maximilien/i18n4go](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/maximilien/i18n4go?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![dWOpen Slack](https://raw.githubusercontent.com/maximilien/i18n4go/master/slack/slack.png)](https://dwopen.slack.com/messages/i18n4go/)
+[![Join the chat at https://gitter.im/EverlongProject/i18n4go](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EverlongProject/i18n4go?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![dWOpen Slack](https://raw.githubusercontent.com/EverlongProject/i18n4go/master/slack/slack.png)](https://dwopen.slack.com/messages/i18n4go/)
 
 This is a general purpose internationalization (i18n) tooling for Go language (Golang) programs. It allows you to prepare Go language code for internationalization and localization (l10n). You can also use it to help maintain the resulting i18n-enabled Golang code so that it remains internationalized. This tool was extracted while we worked on enabling the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with i18n support.
 
-This tool is licensed under the [Apache 2.0 OSS license](https://github.com/maximilien/i18n4go/blob/master/LICENSE). We'd love to hear from you if you are using, attempting to use, or planning to use this tool. 
+This tool is licensed under the [Apache 2.0 OSS license](https://github.com/EverlongProject/i18n4go/blob/master/LICENSE). We'd love to hear from you if you are using, attempting to use, or planning to use this tool. 
 
 Two additional ways, besides Gitter or Slack chat above, to contact us:
 
-1. Feel free to [open an issue (good or bad)](https://github.com/maximilien/i18n4go/issues) here on Github.
+1. Feel free to [open an issue (good or bad)](https://github.com/EverlongProject/i18n4go/issues) here on Github.
 2. Send email to `i18n4go` at the Gmail domain.
 
 ## Getting Started
@@ -18,7 +18,7 @@ Two additional ways, besides Gitter or Slack chat above, to contact us:
 ### Overview Presentations, Talks, Blogs
 ----------------------------------------
 
-* Talk at [GoSF Meetup](http://www.meetup.com/golangsf/events/220603955/) on April, 2015. Slides ([PDF](https://github.com/maximilien/presentations/blob/master/2015/i18n4go-gosf-meetup/releases/i18n4go-v0.4.1.pdf) and [PPTX](https://github.com/maximilien/presentations/blob/master/2015/i18n4go-gosf-meetup/releases/i18n4go-v0.4.1.pptx)), [demo](https://github.com/maximilien/i18n4go/tree/master/examples/demo1)
+* Talk at [GoSF Meetup](http://www.meetup.com/golangsf/events/220603955/) on April, 2015. Slides ([PDF](https://github.com/EverlongProject/presentations/blob/master/2015/i18n4go-gosf-meetup/releases/i18n4go-v0.4.1.pdf) and [PPTX](https://github.com/EverlongProject/presentations/blob/master/2015/i18n4go-gosf-meetup/releases/i18n4go-v0.4.1.pptx)), [demo](https://github.com/EverlongProject/i18n4go/tree/master/examples/demo1)
 
 * Blog post on July, 2015 at IBM's developerWorks: [i18n4go: Taking your Golang Projects Global for Fun or Profits](https://developer.ibm.com/open/2015/07/18/i18n4go-taking-golang-projects-global-fun-profits/)
 
@@ -28,7 +28,7 @@ Two additional ways, besides Gitter or Slack chat above, to contact us:
 Assuming you have a valid [Golang 1.4.2](https://golang.org/dl/) or [later](https://golang.org/dl/) installed for your system, you can quickly get the latest `i18n4go` executable by running the following `go` command:
 
 ```
-$ go get github.com/maximilien/i18n4go/i18n4go
+$ go get github.com/EverlongProject/i18n4go/i18n4go
 ```
 
 This will build and place the `i18n4go` executable built for your operating system in your `$GOPATH/bin` directory.
@@ -39,10 +39,10 @@ This will build and place the `i18n4go` executable built for your operating syst
 Clone this repo and build it. Using the following commands on a Linux or Mac OS X system:
 
 ```
-$ mkdir -p i18n4go/src/github.com/maximilien
+$ mkdir -p i18n4go/src/github.com/EverlongProject
 $ export GOPATH=$(pwd)/i18n4go:$GOPATH
-$ cd i18n4go/src/github.com/maximilien
-$ git clone https://github.com/maximilien/i18n4go.git
+$ cd i18n4go/src/github.com/EverlongProject
+$ git clone https://github.com/EverlongProject/i18n4go.git
 $ cd i18n4go
 $ ./bin/build
 ```
@@ -68,15 +68,15 @@ $ bin/test
  Formatting packages...
 
  Integration Testing packages:
-ok  	github.com/maximilien/i18n4go/integration/checkup	1.571s
-ok  	github.com/maximilien/i18n4go/integration/create_translations	1.542s
-ok  	github.com/maximilien/i18n4go/integration/extract_strings	1.694s
-ok  	github.com/maximilien/i18n4go/integration/fixup	1.657s
-ok  	github.com/maximilien/i18n4go/integration/merge_strings	1.645s
-ok  	github.com/maximilien/i18n4go/integration/rewrite_package	1.853s
-ok  	github.com/maximilien/i18n4go/integration/show_missing_strings	1.590s
-?   	github.com/maximilien/i18n4go/integration/test_helpers	[no test files]
-ok  	github.com/maximilien/i18n4go/integration/verify_strings	1.701s
+ok  	github.com/EverlongProject/i18n4go/integration/checkup	1.571s
+ok  	github.com/EverlongProject/i18n4go/integration/create_translations	1.542s
+ok  	github.com/EverlongProject/i18n4go/integration/extract_strings	1.694s
+ok  	github.com/EverlongProject/i18n4go/integration/fixup	1.657s
+ok  	github.com/EverlongProject/i18n4go/integration/merge_strings	1.645s
+ok  	github.com/EverlongProject/i18n4go/integration/rewrite_package	1.853s
+ok  	github.com/EverlongProject/i18n4go/integration/show_missing_strings	1.590s
+?   	github.com/EverlongProject/i18n4go/integration/test_helpers	[no test files]
+ok  	github.com/EverlongProject/i18n4go/integration/verify_strings	1.701s
 
  Vetting packages for potential issues...
 
@@ -109,7 +109,7 @@ For instance to create `fr_FR` file(s) for French and every other locale_Languag
 
 ### Typical Workflow Diagram
 
-![Typical i18n4go workflow diagram](https://github.com/maximilien/i18n4go/blob/master/docs/images/typical-workflow.png)
+![Typical i18n4go workflow diagram](https://github.com/EverlongProject/i18n4go/blob/master/docs/images/typical-workflow.png)
 
 ### Help
 --------
@@ -474,7 +474,7 @@ The `fixup` command interactively lets users add, update, or remove translations
 
 The exclude.json file can be used to manage which strings should not be extract with the `extracting-strings` command. In the `excluded.json` file,
 you can specifie string literals to ignore as well as classes of strings using a Perl-style regular expression. We have provided an example file
-[exclude](https://github.com/maximilien/i18n4go/blob/master/example/excluded.json) to demonstrate the string and regexp cases.
+[exclude](https://github.com/EverlongProject/i18n4go/blob/master/example/excluded.json) to demonstrate the string and regexp cases.
 
 ### string literals
 
@@ -574,7 +574,7 @@ Optionally, you can use `bin/run` to compile and run the executable in one step.
 ## Contributing
 ---------------
 
-* We gratefully acknowledge and thank the [current contributors](https://github.com/maximilien/i18n4go/graphs/contributors)
+* We gratefully acknowledge and thank the [current contributors](https://github.com/EverlongProject/i18n4go/graphs/contributors)
 * We welcome any and all contributions as Pull Requests (PR)
 * We also welcome issues and bug report and new feature request. We will address as time permits
 * Follow the steps above in Developing to get your system setup correctly
