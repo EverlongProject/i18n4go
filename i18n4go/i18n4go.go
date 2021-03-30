@@ -4,10 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"runtime/debug"
 	"strings"
 	"time"
-
-	"runtime/debug"
 
 	"github.com/EverlongProject/i18n4go/cmds"
 	"github.com/EverlongProject/i18n4go/common"
@@ -233,6 +232,7 @@ func init() {
 
 	flag.BoolVar(&options.OutputFlatFlag, "output-flat", true, "generated files are created in the specified output directory")
 	flag.BoolVar(&options.OutputMatchPackageFlag, "output-match-package", false, "generated files are created in directory to match the package name")
+	flag.BoolVar(&options.OutputFormatFlatFlag, "output-format-flat", false, "generated files are created in flat file format")
 
 	flag.StringVar(&options.FilenameFlag, "f", "", "the file name for which strings are extracted")
 

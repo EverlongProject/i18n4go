@@ -19,6 +19,7 @@ type Options struct {
 	OutputMatchImportFlag  bool
 	OutputMatchPackageFlag bool
 	OutputFlatFlag         bool
+	OutputFormatFlatFlag   bool
 
 	ExcludedFilenameFlag  string
 	SubstringFilenameFlag string

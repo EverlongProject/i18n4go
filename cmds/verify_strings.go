@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"encoding/json"
@@ -126,11 +127,26 @@ func LoadI18nStringInfos(fileName string) ([]I18nStringInfo, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	var i18nStringInfos []I18nStringInfo
-	err = json.Unmarshal(content, &i18nStringInfos)
-	if err != nil {
-		return nil, err
+	if content[0] == '[' {
+		err = json.Unmarshal(content, &i18nStringInfos)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		// flat file
+		var mp map[string]interface{}
+		err = json.Unmarshal(content, &mp)
+		if err != nil {
+			return nil, err
+		}
+		for k, v := range mp {
+			i18nStringInfos = append(i18nStringInfos, I18nStringInfo{
+				ID:          k,
+				Translation: v,
+			})
+		}
+		sort.Slice(i18nStringInfos, func(i, j int) bool { return i18nStringInfos[i].ID < i18nStringInfos[j].ID })
 	}
 
 	return i18nStringInfos, nil
@@ -153,7 +169,17 @@ func CreateI18nStringInfoMap(i18nStringInfos []I18nStringInfo) (map[string]I18nS
 }
 
 func SaveI18nStringInfos(printer common.PrinterInterface, options common.Options, i18nStringInfos []I18nStringInfo, fileName string) error {
-	jsonData, err := json.MarshalIndent(i18nStringInfos, "", "   ")
+	var jsonData []byte
+	var err error
+	if options.OutputFormatFlatFlag {
+		strs := map[string]interface{}{}
+		for _, i := range i18nStringInfos {
+			strs[i.ID] = i.Translation
+		}
+		jsonData, err = json.MarshalIndent(strs, "", "   ")
+	} else {
+		jsonData, err = json.MarshalIndent(i18nStringInfos, "", "   ")
+	}
 	if err != nil {
 		printer.Println(err)
 		return err
