@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/pivotal-cf-experimental/jibber_jabber"
-	"google.golang.org/genproto/googleapis/ads/googleads/v1/resources"
 
 	go_i18n "github.com/EverlongProject/go-i18n/i18n"
 )
@@ -92,7 +91,7 @@ func loadFromAsset(packageName, assetPath, locale, language string) error {
 	assetName := locale + ".all.json"
 	assetKey := filepath.Join(assetPath, language, packageName, assetName)
 
-	byteArray, err := resources.Asset(assetKey)
+	byteArray, err := os.ReadFile(assetKey)
 	if err != nil {
 		return err
 	}
