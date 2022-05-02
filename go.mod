@@ -3,6 +3,7 @@ module github.com/EverlongProject/i18n4go
 go 1.16
 
 require (
+	dmitri.shuralyov.com/go/generated v0.0.0-20211227232225-c5b6cf572ec5 // indirect
 	github.com/EverlongProject/go-i18n v1.8.1
 	github.com/cloudfoundry/jibber_jabber v0.0.0-20151120183258-bcc4c8345a21 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect

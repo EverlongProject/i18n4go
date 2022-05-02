@@ -20,6 +20,7 @@ import (
 	"io"
 	"io/ioutil"
 
+	"dmitri.shuralyov.com/go/generated"
 	"github.com/EverlongProject/i18n4go/common"
 )
 
@@ -132,6 +133,12 @@ func (es *extractStrings) Run() error {
 }
 
 func (es *extractStrings) InspectFile(filename string) error {
+	if isGenerated, err := generated.ParseFile(filename); isGenerated {
+		return nil
+	} else if err != nil {
+		return err
+	}
+
 	es.Println("i18n4go: extracting strings from file:", filename)
 	if es.options.DryRunFlag {
 		es.Println("WARNING running in -dry-run mode")

@@ -1,3 +1,5 @@
+dmitri.shuralyov.com/go/generated v0.0.0-20211227232225-c5b6cf572ec5 h1:aVJ7xNKqudwDKOM6ynz6Y/Ii1iIgiB8YgsPU5mKWYa0=
+dmitri.shuralyov.com/go/generated v0.0.0-20211227232225-c5b6cf572ec5/go.mod h1:WG7q7swWsS2f9PYpt5DoEP/EBYWx8We5UoRltn9vJl8=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/EverlongProject/go-i18n v1.8.1 h1:sjVYzW3zPTyGi9MCTua9zVL12T2QlHKP8kyfqzL9/CU=
