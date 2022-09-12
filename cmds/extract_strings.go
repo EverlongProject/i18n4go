@@ -479,26 +479,10 @@ func (es *extractStrings) loadSubstringRegexps() error {
 }
 
 func (es *extractStrings) extractString(f *ast.File, fset *token.FileSet) error {
-	shouldProcessBasicLit := true
 	ast.Inspect(f, func(n ast.Node) bool {
 		switch x := n.(type) {
-		case *ast.CallExpr:
-			es.processEnforcedFunc(x, fset)
 		case *ast.BasicLit:
-			if shouldProcessBasicLit {
-				es.processBasicLit(x, n, fset, false)
-			}
-			shouldProcessBasicLit = true
-		case *ast.IndexExpr:
-			_, ok := x.Index.(*ast.BasicLit)
-			if ok {
-				shouldProcessBasicLit = false
-			}
-		case *ast.KeyValueExpr:
-			_, ok := x.Key.(*ast.BasicLit)
-			if ok {
-				shouldProcessBasicLit = false
-			}
+			es.processBasicLit(x, n, fset, false)
 		}
 		return true
 	})
@@ -612,27 +596,4 @@ func (es *extractStrings) filter(aString string) bool {
 	}
 
 	return false
-}
-
-func (es *extractStrings) processEnforcedFunc(call *ast.CallExpr, fset *token.FileSet) {
-	if fun, ok := call.Fun.(*ast.SelectorExpr); ok {
-		for _, enforcedFunc := range es.EnforcedFuncs {
-			if fun.Sel.Name == enforcedFunc {
-				for _, arg := range call.Args {
-					if b, ok := arg.(*ast.BasicLit); ok {
-						es.processBasicLit(b, arg, fset, true)
-						return
-					}
-					// in case a string argument is wrapped by fmt.Sprintf or similar funcs
-					if innerCall, ok := arg.(*ast.CallExpr); ok {
-						for _, innerArg := range innerCall.Args {
-							if innerB, ok := innerArg.(*ast.BasicLit); ok {
-								es.processBasicLit(innerB, innerArg, fset, true)
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 }
