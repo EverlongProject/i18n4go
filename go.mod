@@ -22,4 +22,4 @@ require (
 )
 
 // Old versions of this library (anything before 0.3.8) have a known security vulnerability, see https://github.com/golang/go/issues/56152.
-replace golang.org/x/net => golang.org/x/net v0.4.0
+// replace golang.org/x/net => golang.org/x/net v0.4.0
