@@ -30,3 +30,7 @@ replace golang.org/x/net/http2 => golang.org/x/net/http2 v0.0.0-20211209124913-4
 replace golang.org/x/crypto => golang.org/x/crypto v0.0.0-20201216223049-8b5274cf687f
 
 replace golang.org/x/crypto/ssh => golang.org/x/crypto/ssh v0.0.0-20200220183623-bac4c82f6975
+
+replace golang.org/x/text => golang.org/x/text v0.3.3
+
+replace golang.org/x/net => golang.org/x/net v0.4.0
