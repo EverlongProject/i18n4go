@@ -4,7 +4,8 @@
       "value": "Show help",
       "offset": 1332,
       "line": 36,
-      "column": 16
+      "column": 16,
+      "locales": ["fr"]
    },
    {
       "filename": "../../test_fixtures/extract_strings/f_option/input_files/app.go",

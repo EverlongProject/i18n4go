@@ -482,9 +482,10 @@ func (es *extractStrings) extractString(f *ast.File, fset *token.FileSet) error 
 	ast.Inspect(f, func(n ast.Node) bool {
 		switch x := n.(type) {
 		case *ast.CallExpr:
-			es.processEnforcedFunc(x, fset)
+			es.processEnforcedFunc(x, fset, f.Comments)
 		case *ast.BasicLit:
-			es.processBasicLit(x, n, fset, false)
+			es.processBasicLit(x, n, fset, f.Comments, false)
+		case *ast.Comment:
 		}
 		return true
 	})
@@ -492,7 +493,21 @@ func (es *extractStrings) extractString(f *ast.File, fset *token.FileSet) error 
 	return nil
 }
 
-func (es *extractStrings) processBasicLit(basicLit *ast.BasicLit, n ast.Node, fset *token.FileSet, mustInclude bool) {
+var commentRegex = regexp.MustCompile(`locales:([\w\-\,]+)`)
+
+func (es *extractStrings) processBasicLit(basicLit *ast.BasicLit, n ast.Node, fset *token.FileSet, comments []*ast.CommentGroup, mustInclude bool) {
+
+	var locales []string
+	commentMap := ast.NewCommentMap(fset, n, comments)
+	for _, commentGroup := range commentMap[n] {
+		for _, comment := range commentGroup.List {
+			matches := commentRegex.FindAllStringSubmatch(comment.Text, 1)
+			if len(matches) == 1 && len(matches[0]) == 2 {
+				locales = strings.Split(matches[0][1], ",")
+			}
+		}
+	}
+
 	foundSubstring := false
 	for _, compiledRegexp := range es.SubstringRegexps {
 		if compiledRegexp.MatchString(basicLit.Value) {
@@ -503,11 +518,14 @@ func (es *extractStrings) processBasicLit(basicLit *ast.BasicLit, n ast.Node, fs
 			}
 			captureGroup := submatches[1]
 			position := fset.Position(n.Pos())
+
 			stringInfo := common.StringInfo{Value: captureGroup,
 				Filename: position.Filename,
 				Offset:   position.Offset,
 				Line:     position.Line,
-				Column:   position.Column}
+				Column:   position.Column,
+				Locales:  locales,
+			}
 			es.ExtractedStrings[captureGroup] = stringInfo
 			foundSubstring = true
 		}
@@ -530,11 +548,14 @@ func (es *extractStrings) processBasicLit(basicLit *ast.BasicLit, n ast.Node, fs
 	s, _ := strconv.Unquote(basicLit.Value)
 	if len(s) > 0 && basicLit.Kind == token.STRING && s != "\t" && s != "\n" && s != " " && !es.filter(s) { // TODO: fix to remove these: s != "\\t" && s != "\\n" && s != " "
 		position := fset.Position(n.Pos())
+
 		stringInfo := common.StringInfo{Value: s,
 			Filename: position.Filename,
 			Offset:   position.Offset,
 			Line:     position.Line,
-			Column:   position.Column}
+			Column:   position.Column,
+			Locales:  locales,
+		}
 		es.ExtractedStrings[s] = stringInfo
 	}
 }
@@ -600,20 +621,20 @@ func (es *extractStrings) filter(aString string) bool {
 	return false
 }
 
-func (es *extractStrings) processEnforcedFunc(call *ast.CallExpr, fset *token.FileSet) {
+func (es *extractStrings) processEnforcedFunc(call *ast.CallExpr, fset *token.FileSet, comments []*ast.CommentGroup) {
 	if fun, ok := call.Fun.(*ast.SelectorExpr); ok {
 		for _, enforcedFunc := range es.EnforcedFuncs {
 			if fun.Sel.Name == enforcedFunc {
 				for _, arg := range call.Args {
 					if b, ok := arg.(*ast.BasicLit); ok {
-						es.processBasicLit(b, arg, fset, true)
+						es.processBasicLit(b, arg, fset, comments, true)
 						return
 					}
 					// in case a string argument is wrapped by fmt.Sprintf or similar funcs
 					if innerCall, ok := arg.(*ast.CallExpr); ok {
 						for _, innerArg := range innerCall.Args {
 							if innerB, ok := innerArg.(*ast.BasicLit); ok {
-								es.processBasicLit(innerB, innerArg, fset, true)
+								es.processBasicLit(innerB, innerArg, fset, comments, true)
 							}
 						}
 					}

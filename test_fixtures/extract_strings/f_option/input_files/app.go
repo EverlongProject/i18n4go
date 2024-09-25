@@ -39,8 +39,9 @@ var appHelpTemplate = `{{.Title "NAME:"}}
 
 func NewApp(cmdRunner command_runner.Runner, metadatas ...command_metadata.CommandMetadata) (app *cli.App) {
 	helpCommand := cli.Command{
-		Name:        "help",
-		ShortName:   "h",
+		Name:      "help",
+		ShortName: "h",
+		//locales:fr
 		Description: "Show help",
 		Usage:       fmt.Sprintf("%s help [COMMAND]", cf.Name()),
 		Action: func(c *cli.Context) {
