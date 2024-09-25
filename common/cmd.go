@@ -54,6 +54,9 @@ type StringInfo struct {
 	Offset   int    `json:"offset"`
 	Line     int    `json:"line"`
 	Column   int    `json:"column"`
+
+	// optional, empty means "all locales"
+	Locales []string `json:"locales,omitempty"`
 }
 
 type ExcludedStrings struct {
