@@ -214,6 +214,10 @@ func (vs *verifyStrings) verify(inputFilename string, targetFilename string) err
 	if err != nil {
 		return fmt.Errorf("File has duplicated key: %s\n%s", inputFilename, err)
 	}
+	return vs.Verify(inputMap, targetFilename)
+}
+
+func (vs *verifyStrings) Verify(inputMap map[string]I18nStringInfo, targetFilename string) error {
 
 	targetI18nStringInfos, err := LoadI18nStringInfos(targetFilename)
 	if err != nil {
@@ -278,6 +282,9 @@ func (vs *verifyStrings) verify(inputFilename string, targetFilename string) err
 func (vs *verifyStrings) isTemplatedStringTranslationInvalid(stringInfo I18nStringInfo) bool {
 	if !common.IsTemplatedString(stringInfo.ID) {
 		return false
+	}
+	if stringInfo.Translation == nil {
+		return true
 	}
 	translations := stringInfo.Translations()
 	for _, translation := range translations {
