@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -526,6 +527,10 @@ func (es *extractStrings) processBasicLit(basicLit *ast.BasicLit, n ast.Node, fs
 				Column:   position.Column,
 				Locales:  locales,
 			}
+			if existing, ok := es.ExtractedStrings[captureGroup]; ok {
+				// we already found a string matching this, take the union of their locales so we don't miss any
+				stringInfo.Locales = mergeLocales(stringInfo.Locales, existing.Locales)
+			}
 			es.ExtractedStrings[captureGroup] = stringInfo
 			foundSubstring = true
 		}
@@ -556,8 +561,21 @@ func (es *extractStrings) processBasicLit(basicLit *ast.BasicLit, n ast.Node, fs
 			Column:   position.Column,
 			Locales:  locales,
 		}
+		if existing, ok := es.ExtractedStrings[s]; ok {
+			// we already found a string matching this, take the union of their locales so we don't miss any
+			stringInfo.Locales = mergeLocales(stringInfo.Locales, existing.Locales)
+		}
 		es.ExtractedStrings[s] = stringInfo
 	}
+}
+
+func mergeLocales(a, b []string) []string {
+	// take the union of the locales (with an empty list meaning "all locales")
+	if len(a) == 0 || len(b) == 0 {
+		return nil
+	}
+	// remove duplicates
+	return slices.Compact(slices.Sorted(slices.Values(append(a, b...))))
 }
 
 func readLine(fn string, n int) (string, error) {

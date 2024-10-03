@@ -1,6 +1,6 @@
 module github.com/EverlongProject/i18n4go
 
-go 1.16
+go 1.23
 
 require (
 	github.com/EverlongProject/go-i18n v1.8.1
